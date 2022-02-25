@@ -1,0 +1,49 @@
+@(widgets: Seq[RectangleModel], form: Form[WidgetForm.Rectangle], postUrl: Call)(implicit request: MessagesRequestHeader)
+
+  @main("Widgets") {
+
+
+    @* Flash shows updates to a page *@
+    @request.flash.data.map{ case (name, value) =>
+      <div>@name: @value</div>
+    }
+<div class="tftable">
+  <tr>
+        <h1>Прямоугольники</h1>
+        <th>Длина</th>
+        <th>Ширина</th>
+        <th>Площадь</th>
+  </tr>
+    <p>
+<tr>
+      @for(w <- widgets) {
+        <td>@w.length</td>
+        <td>@w.width</td>
+        <td>@w.area</td>
+</tr>
+  <p>
+  }
+
+    </div>
+
+    <hr/>
+
+    @* Global errors are not tied to any particular form field *@
+    @if(form.hasGlobalErrors) {
+      @form.globalErrors.map { error: FormError =>
+        <div>
+          @error.key: @error.message
+        </div>
+      }
+    }
+
+    @helper.form(postUrl) {
+      @helper.CSRF.formField
+
+      @helper.inputText(form("length"))
+
+      @helper.inputText(form("width"))
+
+      <button>Сделать запись</button>
+    }
+  }
