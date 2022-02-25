@@ -1,5 +1,7 @@
 # play-scala-forms-example
 
+Считаем прямоугольники
+
 
 ## How to run
 
