@@ -1,9 +1,10 @@
-# play-scala-forms-example
+# Сделано из play-scala-forms-example 
 
-Считаем прямоугольники
+Мир прямоугольников!
 
 
-## How to run
+## Как запустить? 
+
 
 Start the Play app:
 
@@ -13,7 +14,11 @@ sbt run
 
 And open [http://localhost:9000/](http://localhost:9000/)
 
-## Credits
+## Что сделано:
+### - добавлена модель прямоугольника в соответствующие пакеты приложения
+### - добавил стили, для красоты
+### - добавил настройки кеша в application.conf
+
 
 
 
