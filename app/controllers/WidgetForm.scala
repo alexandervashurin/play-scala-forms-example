@@ -1,6 +1,7 @@
 package controllers
 
 import org.checkerframework.checker.units.qual.Length
+import play.api.data.validation.Constraints
 
 object WidgetForm {
   import play.api.data.Forms._
@@ -36,8 +37,8 @@ object WidgetForm {
    */
   val form: Form[Rectangle] = Form(
     mapping(
-      "length" -> of(doubleFormat), // так как у numeric нет Double, пришлось делать обёртку
-      "width" -> of(doubleFormat),
+      "длина" -> of(doubleFormat), // так как у numeric нет Double, пришлось делать обёртку
+      "ширина" -> of(doubleFormat),
     )(Rectangle.apply)(Rectangle.unapply)
   )
 
