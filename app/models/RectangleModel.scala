@@ -8,7 +8,7 @@ package models
  * which are used for writes.
  */
 case class RectangleModel(length: Double, width: Double) {
-  require (length > 0, width > 0)
+   // require (length > 0, width > 0) Если расcкомментировать, тогда при отрицательных значениях будет падать в ошибку
 
   lazy val area: Double = length * width
   override def toString = s"length: $length, width: $width, area: $area"
