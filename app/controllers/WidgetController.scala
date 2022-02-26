@@ -24,7 +24,7 @@ class WidgetController @Inject()(cc: MessagesControllerComponents) extends Messa
   import WidgetForm._
 
   private val widgets = mutable.ArrayBuffer(
-    RectangleModel(1, 123),//тестовые данные
+    RectangleModel(1, 123),//тестовые данные, для проверки работы отображения
     RectangleModel(2, 456),
     RectangleModel(44, 789)
   )
@@ -34,17 +34,17 @@ class WidgetController @Inject()(cc: MessagesControllerComponents) extends Messa
   // of the "WidgetController" references are inside the .scala file.
   private val postUrl = routes.WidgetController.createWidget
 
-  def index = Action {
+  def index: Action[AnyContent] = Action {
     Ok(views.html.index())
   }
 
-  def listWidgets = Action { implicit request: MessagesRequest[AnyContent] =>
+  def listWidgets: Action[AnyContent] = Action { implicit request: MessagesRequest[AnyContent] =>
     // Pass an unpopulated form to the template
     Ok(views.html.listWidgets(widgets.toSeq, form, postUrl))
   }
 
   // This will be the action that handles our form post
-  def createWidget = Action { implicit request: MessagesRequest[AnyContent] =>
+  def createWidget: Action[AnyContent] = Action { implicit request: MessagesRequest[AnyContent] =>
     val errorFunction = { formWithErrors: Form[Rectangle] =>
       // This is the bad case, where the form had validation errors.
       // Let's show the user the form again, with the errors highlighted.
@@ -56,7 +56,7 @@ class WidgetController @Inject()(cc: MessagesControllerComponents) extends Messa
       // This is the good case, where the form was successfully parsed as a Data object.
       val widget = RectangleModel(length= data.length, width = data.width)
       widgets += widget
-      Redirect(routes.WidgetController.listWidgets).flashing("info" -> "Widget added!")
+      Redirect(routes.WidgetController.listWidgets).flashing("info" -> "Прямоугольник добавлен!")
     }
 
     val formValidationResult = form.bindFromRequest()

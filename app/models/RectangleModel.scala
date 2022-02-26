@@ -10,7 +10,7 @@ package models
 case class RectangleModel(length: Double, width: Double) {
   require (length > 0, width > 0)
 
-  lazy val area = length * width
+  lazy val area: Double = length * width
   override def toString = s"length: $length, width: $width, area: $area"
 }
 
