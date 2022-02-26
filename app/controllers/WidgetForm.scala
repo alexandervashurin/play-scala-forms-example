@@ -16,7 +16,7 @@ object WidgetForm {
 
   // здесь я определил класс прямоугольник, при желании его сильнее можно абстрагировать
   case class Rectangle(length: Double, width: Double) {
-    require (length > 0, width > 0)
+   // require (length > 0, width > 0) Если раскомментировать, тогда при отрицательных значениях будет падать в ошибку
 
     lazy val area: Double = length * width
     override def toString = s"length: $length, width: $width, area: $area"
