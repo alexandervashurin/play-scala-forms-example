@@ -1,9 +1,9 @@
 package controllers
 
-import controllers.WidgetForm.Rectangle.area
+import controllers._
 
 import javax.inject.Inject
-import models.RectangleModel
+import models._
 import play.api.data._
 import play.api.i18n._
 import play.api.mvc._
@@ -25,8 +25,8 @@ class WidgetController @Inject()(cc: MessagesControllerComponents) extends Messa
 
   private val widgets = mutable.ArrayBuffer(
     RectangleModel(1, 123),//тестовые данные, для проверки работы отображения
-    RectangleModel(2, 456),
-    RectangleModel(44, 789)
+    CircleModel(100),
+    TriangleModel(44, 78, 56)
   )
 
   // The URL to the widget.  You can call this directly from the template, but it
@@ -45,7 +45,7 @@ class WidgetController @Inject()(cc: MessagesControllerComponents) extends Messa
 
   // This will be the action that handles our form post
   def createWidget: Action[AnyContent] = Action { implicit request: MessagesRequest[AnyContent] =>
-    val errorFunction = { formWithErrors: Form[Rectangle] =>
+    val errorFunction = { formWithErrors: Form[AnyContent] =>
       // This is the bad case, where the form had validation errors.
       // Let's show the user the form again, with the errors highlighted.
       // Note how we pass the form with errors to the template.

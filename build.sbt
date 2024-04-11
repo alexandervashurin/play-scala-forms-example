@@ -1,17 +1,19 @@
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
+  //.enablePlugins(PlayNettyServer).disablePlugins(PlayPekkoHttpServer) // uncomment to use the Netty backend
   .settings(
     name := """play-scala-forms-example""",
-    version := "2.8.x",
-    scalaVersion := "2.13.6",
+    version := "1.0-SNAPSHOT",
+    crossScalaVersions := Seq("2.13.13", "3.3.3"),
+    scalaVersion := crossScalaVersions.value.head,
     libraryDependencies ++= Seq(
       guice,
-      caffeine, // Добавил бибилиотеку согласно руководства https://www.playframework.com/documentation/2.8.x/ScalaCache
-      "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
+      "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
     ),
     scalacOptions ++= Seq(
       "-feature",
-      "-deprecation",
-      "-Xfatal-warnings"
-    )
+      "-Werror"
+    ),
+    // Needed for ssl-config to create self signed certificated under Java 17
+    Test / javaOptions ++= List("--add-exports=java.base/sun.security.x509=ALL-UNNAMED"),
   )
